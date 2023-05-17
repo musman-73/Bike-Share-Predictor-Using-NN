@@ -12,7 +12,7 @@ The dataset used for this project is the "London Bike Sharing" dataset. It conta
 
 ## blah blah blah
 
-## Contriutors
+## Contributors
 - Muhammad Ali Usman
 - Misbah Noor Awan
 - Hadia Tarik
