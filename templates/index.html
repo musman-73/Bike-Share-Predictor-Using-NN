@@ -1,69 +1,190 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Bike Share Prediction</title>
-    </head>
-    <body>
-        <h1>Bike Share Prediction</h1>
-        <form id="prediction-form" action="/predict" method="post">
-            <label for="t1">Real Temperature (°C):</label>
-            <input type="number" name="t1" id="t1" step="any" required><br>
-            <label for="t2">Feels Like Temperature (°C):</label>
-            <input type="number" name="t2" id="t2" step="any" required><br>
-            <label for="hum">Humidity (%):</label>
-            <input type="number" name="hum" id="hum" step="any" min="0"
-                max="100" required><br>
 
-            <label for="wind_speed">Wind Speed (km/h):</label>
-            <input type="number" name="wind_speed" id="wind_speed" step="any"
-                required><br>
+<head>
+    <title>Bike Share Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 
-            <label for="weather_code">Weather Code:</label>
-            <select name="weather_code" id="weather_code" required>
-                <option value="1">Clear</option>
-                <option value="2">Scattered Clouds / Few Clouds</option>
-                <option value="3">Broken Clouds</option>
-                <option value="4">Cloudy</option>
-                <option value="7">Rain / Light Rain Shower / Light Rain</option>
-                <option value="99">Rain with Thunderstorm</option>
-                <option value="99">Snowfall</option>
-                <option value="99">Freezing Fog</option>
-            </select><br>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
-            <label for="is_holiday">Is Holiday:</label>
-            <input type="checkbox" name="is_holiday" id="is_holiday" value="1"><br>
-            <label for="is_weekend">Is Weekend:</label>
-            <input type="checkbox" name="is_weekend" id="is_weekend" value="1"><br>
-            <label for="season">Season:</label>
-            <select name="season" id="season" required>
-                <option value="0">Spring</option>
-                <option value="1">Summer</option>
-                <option value="2">Fall</option>
-                <option value="3">Winter</option>
-            </select><br>
+<style>
+    .vertical-center {
+        width: 100%;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
 
-            <label for="month">Month (1-12):</label>
-            <input type="number" name="month" id="month" min="1" max="12"
-                required><br>
+    .logo {
+        background-image: url("{{ url_for('static', filename='logo.png') }}");
+        background-repeat: no-repeat;
+        background-size: 14cm;
+        background-attachment: fixed;
+        background-position: center;
+        padding: 2cm;
+    }
 
-            <label for="day_in_week">Day in Week (0-6):</label>
-            <input type="number" name="day_in_week" id="day_in_week" min="0"
-                max="6" required><br>
+    .shadow {
+        box-shadow: 1px;
+        margin: 0 3cm;
+    }
+</style>
 
-            <label for="hour">Hour in Day (0-23):</label>
-            <input type="number" name="hour" id="hour" min="0" max="23"
-                required><br>
+<body>
+    <div class="vertical-center">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="row align-items-center">
+                    <div class="col-5 logo">
+                        <h1 class="display-5 text-info">Prediction of <br>Bike Usage in a City</h1>
+                        <h3 class="lead">Depending on the weather and time</h3>
+                        <h5 class="display-6">CS471 Machine Learning BESE-11<br> 2K20 A</h5>
+                        <br><br><br><br><br><br><br><br><br><br><br>
+                        <ul class="list-unstyled text-end lead">
+                            <li>Hadia Tarik &emsp;&emsp;335952</li>
+                            <li>Misbah Noor Awan &emsp;&emsp;333811</li>
+                            <li>Muhammad Ali Usman &emsp;&emsp;332608</li>
+                        </ul>
+                    </div>
+                    <div class="col-4 border border-info">
+                        <form id="prediction-form" action="/predict" method="post" style="padding:30px;">
+                            <h1 class="display-5 text-info" style="padding: 50px 0;">Enter Values for Attributes</h1>
+                            <div class="mb-3">
+                                <div class="row justify-content-center">
+                                    <div class="col-5">
+                                        <label for="t1" class="form-label">Real Temperature <span
+                                                class="form-text">(°C)</span></label>
+                                        <input type="number" class="form-control" name="t1" id="t1" step="any"
+                                            required><br>
+                                    </div>
+                                    <div class="col-5">
+                                        <label for="t2" class="form-label">Feels Like Temperature <span
+                                                class="form-text">(°C)</span></label>
+                                        <input type="number" class="form-control" name="t2" id="t2" step="any"
+                                            required><br>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row justify-content-center">
+                                    <div class="col-5">
+                                        <label for="season" class="form-label">Season</label>
+                                        <select name="season" id="season" required class="form-select"
+                                            aria-label="Default select example">
+                                            <option value="0">Spring</option>
+                                            <option value="1">Summer</option>
+                                            <option value="2">Fall</option>
+                                            <option value="3">Winter</option>
+                                        </select><br>
 
-            <button type="submit">Predict</button>
-        </form>
+                                    </div>
+                                    <div class="col-5">
+                                        <label for="weather_code" class="form-label">Weather Code</label>
+                                        <select name="weather_code" id="weather_code" required class="form-select"
+                                            aria-label="Default select example">
+                                            <option value="1">Clear</option>
+                                            <option value="2">Scattered Clouds / Few Clouds</option>
+                                            <option value="3">Broken Clouds</option>
+                                            <option value="4">Cloudy</option>
+                                            <option value="7">Rain / Light Rain Shower / Light Rain</option>
+                                            <option value="99">Rain with Thunderstorm</option>
+                                            <option value="99">Snowfall</option>
+                                            <option value="99">Freezing Fog</option>
+                                        </select><br>
+                                    </div>
+                                </div>
 
-        <div id="prediction-result"></div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row justify-content-center">
+                                    <div class="col-5">
+                                        <label for="hum" class="form-label">Humidity <span
+                                                class="form-text">(%)</span></label>
+                                        <input type="number" name="hum" id="hum" step="any" min="0" max="100" required
+                                            class="form-control"><br>
+                                    </div>
+                                    <div class="col-5">
+                                        <label for="wind_speed" class="form-label">Wind Speed <span
+                                                class="form-text">(Km/h)</span></label>
+                                        <input type="number" name="wind_speed" id="wind_speed" step="any" required
+                                            class="form-control"><br>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <div class="row justify-content-center">
+                                    <div class="col-5">
+                                        <label for="is_holiday" class="form-label"
+                                            class="form-check-label">Holiday</label>
+                                        <input type="checkbox" name="is_holiday" id="is_holiday" value="1"
+                                            class="form-check-input">
+                                    </div>
+                                    <div class="col-5">
+                                        <label for="is_weekend" class="form-label"
+                                            class="form-check-label">Weekend</label>
+                                        <input type="checkbox" name="is_weekend" id="is_weekend" value="1"
+                                            class="form-check-input">
+                                    </div>
+                                </div>
 
-        <script>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="row justify-content-center">
+                                    <div class="col-3">
+                                        <label for="month" class="form-label">Month <span
+                                                class="form-text">(1-12)</span>:</label>
+                                        <input type="number" name="month" id="month" min="1" max="12" required
+                                            class="form-control">
+
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="day_in_week" class="form-label">Day in Week <span
+                                                class="form-text">(0-6)</span>:</label>
+                                        <input type="number" name="day_in_week" id="day_in_week" min="0" max="6"
+                                            required class="form-control">
+                                    </div>
+                                    <div class="col-3">
+                                        <label for="hour" class="form-label">Hour in Day <span
+                                                class="form-text">(0-23)</span>:</label>
+                                        <input type="number" name="hour" id="hour" min="0" max="23" required
+                                            class="form-control">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="mb-3">
+                                <div class="row justify-content-end">
+                                    <div class="col-4">
+                                        <i class="fa-regular fa-lightbulb"></i>
+                                        <button type="submit" class="btn btn-lg btn-outline-info">Predict &nbsp;
+                                            &nbsp;➤</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-3">
+                        <div class="">
+                            <h1 class="display-5 text-info text-center">Prediction</h1>
+                            <div id="prediction-result" class="display-6 text-center shadow"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
         const form = document.getElementById('prediction-form');
         const resultDiv = document.getElementById('prediction-result');
 
-        form.addEventListener('submit', function(event) {
+        form.addEventListener('submit', function (event) {
             event.preventDefault();
 
             const t1 = parseFloat(document.getElementById('t1').value);
@@ -92,14 +213,18 @@
                     'categorical_data': catData
                 })
             })
-            .then(response => response.json())
-            .then(data => {
-                resultDiv.textContent = 'Prediction: ' + data[0];
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+                .then(response => response.json())
+                .then(data => {
+                    resultDiv.textContent = Math.round(data[0] * 100)/100;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         });
     </script>
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+
 </html>
