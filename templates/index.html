@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Regression Model Prediction</title>
+    </head>
+    <body>
+        <h1>Bike Share Prediction</h1>
+        <form id="prediction-form" action="/predict" method="post">
+            <label for="t1">Real Temperature (°C):</label>
+            <input type="number" name="t1" id="t1" step="any" required><br>
+            <label for="t2">Feels Like Temperature (°C):</label>
+            <input type="number" name="t2" id="t2" step="any" required><br>
+            <label for="hum">Humidity (%):</label>
+            <input type="number" name="hum" id="hum" step="any" min="0"
+                max="100" required><br>
+
+            <label for="wind_speed">Wind Speed (km/h):</label>
+            <input type="number" name="wind_speed" id="wind_speed" step="any"
+                required><br>
+
+            <label for="weather_code">Weather Code:</label>
+            <select name="weather_code" id="weather_code" required>
+                <option value="1">Clear</option>
+                <option value="2">Scattered Clouds / Few Clouds</option>
+                <option value="3">Broken Clouds</option>
+                <option value="4">Cloudy</option>
+                <option value="7">Rain / Light Rain Shower / Light Rain</option>
+                <option value="99">Rain with Thunderstorm</option>
+                <option value="99">Snowfall</option>
+                <option value="99">Freezing Fog</option>
+            </select><br>
+
+            <label for="is_holiday">Is Holiday:</label>
+            <input type="checkbox" name="is_holiday" id="is_holiday" value="1"><br>
+            <label for="is_weekend">Is Weekend:</label>
+            <input type="checkbox" name="is_weekend" id="is_weekend" value="1"><br>
+            <label for="season">Season:</label>
+            <select name="season" id="season" required>
+                <option value="0">Spring</option>
+                <option value="1">Summer</option>
+                <option value="2">Fall</option>
+                <option value="3">Winter</option>
+            </select><br>
+
+            <label for="month">Month (1-12):</label>
+            <input type="number" name="month" id="month" min="1" max="12"
+                required><br>
+
+            <label for="day_in_week">Day in Week (0-6):</label>
+            <input type="number" name="day_in_week" id="day_in_week" min="0"
+                max="6" required><br>
+
+            <label for="hour">Hour in Day (0-23):</label>
+            <input type="number" name="hour" id="hour" min="0" max="23"
+                required><br>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        <div id="prediction-result"></div>
+
+        <script>
+        const form = document.getElementById('prediction-form');
+        const resultDiv = document.getElementById('prediction-result');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const t1 = parseFloat(document.getElementById('t1').value);
+            const t2 = parseFloat(document.getElementById('t2').value);
+            const hum = parseFloat(document.getElementById('hum').value);
+            const wind_speed = parseFloat(document.getElementById('wind_speed').value);
+            const weather_code = parseFloat(document.getElementById('weather_code').value);
+            const is_holiday = document.getElementById('is_holiday').checked ? 1 : 0;
+            const is_weekend = document.getElementById('is_weekend').checked ? 1 : 0;
+            const season = parseFloat(document.getElementById('season').value);
+            const month = parseInt(document.getElementById('month').value);
+            const day_in_week = parseInt(document.getElementById('day_in_week').value);
+            const hour = parseInt(document.getElementById('hour').value);
+
+            const inputData = [t1, t2, hum, wind_speed, is_holiday, is_weekend];
+            const catData = [weather_code, season, month, day_in_week, hour];
+
+
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'data': inputData,
+                    'categorical_data': catData
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                resultDiv.textContent = 'Prediction: ' + data[0];
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+    </body>
+</html>
