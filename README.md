@@ -1,6 +1,6 @@
 # Bike-Share-Predictor-Using-NN
 
-![bike-sharing](bike.png)
+![bike-sharing](static/logo.png)
 
 This repository contains a machine learning model built using a neural networks to predict the future bike shares in a city based on weather conditions and time of the day. The model is trained on "London Bike Sharing" dataset.
 
@@ -10,7 +10,11 @@ The objective of this project is to accurately forecast the number of bike share
 ## Dataset
 The dataset used for this project is the "London Bike Sharing" dataset. It contains hourly data of bike rentals for two years (2015 and 2016) in London, UK. The dataset includes features such as weather conditions, public holidays, and seasonal patterns. The target variable in the dataset is the count of new bike shares for a given day.
 
-## blah blah blah
+## Usage
+To use the model, follow the instructions below:
+- Ensure that you have Python 3.7 or above installed on your system.
+- Install the required dependencies by running <code>pip install -r requirements.txt</code>
+- Run <code>app.py</code> file.
 
 ## Contributors
 - Muhammad Ali Usman
