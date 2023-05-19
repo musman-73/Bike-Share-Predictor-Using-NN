@@ -29,7 +29,7 @@
         padding: 2cm;
     }
 
-    .shadow {
+    .margin {
         box-shadow: 1px;
         margin: 0 3cm;
     }
@@ -51,21 +51,21 @@
                             <li>Muhammad Ali Usman &emsp;&emsp;332608</li>
                         </ul>
                     </div>
-                    <div class="col-4 border border-info">
+                    <div class="col-4 border-info border-end border-start">
                         <form id="prediction-form" action="/predict" method="post" style="padding:30px;">
-                            <h1 class="display-5 text-info" style="padding: 50px 0;">Enter Values for Attributes</h1>
+                            <h1 class="display-5 text-info text-center" style="padding: 50px 0;" >Enter Values for Attributes</h1>
                             <div class="mb-3">
                                 <div class="row justify-content-center">
                                     <div class="col-5">
                                         <label for="t1" class="form-label">Real Temperature <span
                                                 class="form-text">(°C)</span></label>
-                                        <input type="number" class="form-control" name="t1" id="t1" step="any"
+                                        <input type="number" class="form-control shadow-sm" name="t1" id="t1" step="any"
                                             required><br>
                                     </div>
                                     <div class="col-5">
                                         <label for="t2" class="form-label">Feels Like Temperature <span
                                                 class="form-text">(°C)</span></label>
-                                        <input type="number" class="form-control" name="t2" id="t2" step="any"
+                                        <input type="number" class="form-control shadow-sm" name="t2" id="t2" step="any"
                                             required><br>
                                     </div>
                                 </div>
@@ -74,7 +74,7 @@
                                 <div class="row justify-content-center">
                                     <div class="col-5">
                                         <label for="season" class="form-label">Season</label>
-                                        <select name="season" id="season" required class="form-select"
+                                        <select name="season" id="season" required class="form-select shadow-sm"
                                             aria-label="Default select example">
                                             <option value="0">Spring</option>
                                             <option value="1">Summer</option>
@@ -85,7 +85,7 @@
                                     </div>
                                     <div class="col-5">
                                         <label for="weather_code" class="form-label">Weather Code</label>
-                                        <select name="weather_code" id="weather_code" required class="form-select"
+                                        <select name="weather_code" id="weather_code" required class="form-select shadow-sm"
                                             aria-label="Default select example">
                                             <option value="1">Clear</option>
                                             <option value="2">Scattered Clouds / Few Clouds</option>
@@ -106,13 +106,13 @@
                                         <label for="hum" class="form-label">Humidity <span
                                                 class="form-text">(%)</span></label>
                                         <input type="number" name="hum" id="hum" step="any" min="0" max="100" required
-                                            class="form-control"><br>
+                                            class="form-control shadow-sm"><br>
                                     </div>
                                     <div class="col-5">
                                         <label for="wind_speed" class="form-label">Wind Speed <span
                                                 class="form-text">(Km/h)</span></label>
                                         <input type="number" name="wind_speed" id="wind_speed" step="any" required
-                                            class="form-control"><br>
+                                            class="form-control shadow-sm"><br>
                                     </div>
                                 </div>
                             </div>
@@ -122,13 +122,13 @@
                                         <label for="is_holiday" class="form-label"
                                             class="form-check-label">Holiday</label>
                                         <input type="checkbox" name="is_holiday" id="is_holiday" value="1"
-                                            class="form-check-input">
+                                            class="form-check-input shadow-sm">
                                     </div>
                                     <div class="col-5">
                                         <label for="is_weekend" class="form-label"
                                             class="form-check-label">Weekend</label>
                                         <input type="checkbox" name="is_weekend" id="is_weekend" value="1"
-                                            class="form-check-input">
+                                            class="form-check-input shadow-sm">
                                     </div>
                                 </div>
 
@@ -140,20 +140,20 @@
                                         <label for="month" class="form-label">Month <span
                                                 class="form-text">(1-12)</span>:</label>
                                         <input type="number" name="month" id="month" min="1" max="12" required
-                                            class="form-control">
+                                            class="form-control shadow-sm">
 
                                     </div>
                                     <div class="col-4">
                                         <label for="day_in_week" class="form-label">Day in Week <span
                                                 class="form-text">(0-6)</span>:</label>
                                         <input type="number" name="day_in_week" id="day_in_week" min="0" max="6"
-                                            required class="form-control">
+                                            required class="form-control shadow-sm">
                                     </div>
                                     <div class="col-3">
                                         <label for="hour" class="form-label">Hour in Day <span
                                                 class="form-text">(0-23)</span>:</label>
                                         <input type="number" name="hour" id="hour" min="0" max="23" required
-                                            class="form-control">
+                                            class="form-control shadow-sm">
                                     </div>
                                 </div>
 
@@ -171,8 +171,12 @@
                     </div>
                     <div class="col-3">
                         <div class="">
-                            <h1 class="display-5 text-info text-center">Prediction</h1>
-                            <div id="prediction-result" class="display-6 text-center shadow"></div>
+        
+                            <h1 class="display-5 text-info text-center">Prediction<img src="{{url_for('static', filename='wind.png')}}" style="width:2cm;"/> </h1>
+                            <div id="prediction-result" class="display-6 text-center border border-muted margin"></div>
+                        </div>
+                        <div class="">
+                            
                         </div>
                     </div>
 
