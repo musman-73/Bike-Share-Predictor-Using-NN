@@ -53,7 +53,8 @@
                     </div>
                     <div class="col-4 border-info border-end border-start">
                         <form id="prediction-form" action="/predict" method="post" style="padding:30px;">
-                            <h1 class="display-5 text-info text-center" style="padding: 50px 0;" >Enter Values for Attributes</h1>
+                            <h1 class="display-5 text-info text-center" style="padding: 50px 0;">Enter Values for
+                                Attributes</h1>
                             <div class="mb-3">
                                 <div class="row justify-content-center">
                                     <div class="col-5">
@@ -85,8 +86,8 @@
                                     </div>
                                     <div class="col-5">
                                         <label for="weather_code" class="form-label">Weather Code</label>
-                                        <select name="weather_code" id="weather_code" required class="form-select shadow-sm"
-                                            aria-label="Default select example">
+                                        <select name="weather_code" id="weather_code" required
+                                            class="form-select shadow-sm" aria-label="Default select example">
                                             <option value="1">Clear</option>
                                             <option value="2">Scattered Clouds / Few Clouds</option>
                                             <option value="3">Broken Clouds</option>
@@ -171,12 +172,13 @@
                     </div>
                     <div class="col-3">
                         <div class="">
-        
-                            <h1 class="display-5 text-info text-center">Prediction<img src="{{url_for('static', filename='wind.png')}}" style="width:2cm;"/> </h1>
+
+                            <h1 class="display-5 text-info text-center">Prediction<img
+                                    src="{{url_for('static', filename='wind.png')}}" style="width:2cm;" /> </h1>
                             <div id="prediction-result" class="display-6 text-center border border-muted margin"></div>
                         </div>
                         <div class="">
-                            
+
                         </div>
                     </div>
 
@@ -219,7 +221,7 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    resultDiv.textContent = Math.round(data[0] * 100)/100;
+                    resultDiv.textContent = Math.round(data[0] * 100) / 100;
                 })
                 .catch(error => {
                     console.error('Error:', error);
